@@ -1,0 +1,95 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/fraunces';
+@import '@fontsource-variable/jetbrains-mono';
+
+@theme {
+  --font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --color-void: oklch(0.08 0.012 255);
+  --color-void-elevated: oklch(0.13 0.018 255);
+  --color-surface-glass: oklch(0.14 0.02 255 / 0.78);
+  --color-border-subtle: oklch(0.38 0.03 245 / 0.45);
+  --color-border-strong: oklch(0.62 0.08 215 / 0.65);
+
+  --color-text-primary: oklch(0.96 0.01 240);
+  --color-text-secondary: oklch(0.82 0.02 240);
+  --color-text-muted: oklch(0.72 0.025 240);
+
+  --color-accent-warm: oklch(0.83 0.16 75);
+  --color-accent-warm-glow: oklch(0.75 0.18 65);
+  --color-accent-cyan: oklch(0.82 0.14 210);
+  --color-accent-cyan-dim: oklch(0.62 0.11 210);
+  --color-status-danger: oklch(0.72 0.19 28);
+}
+
+:root {
+  color-scheme: dark;
+  background-color: var(--color-void);
+  color: var(--color-text-primary);
+  font-family: var(--font-mono);
+  font-size-adjust: from-font;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-display-editorial {
+  font-family: var(--font-display);
+  font-size-adjust: cap-height from-font;
+  font-variation-settings: 'SOFT' 50, 'WONK' 1;
+}
+
+.font-telemetry {
+  font-family: var(--font-mono);
+  font-size-adjust: ch-width from-font;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Visually hidden utility that becomes visible on keyboard focus (for skip links) */
+.visually-hidden:where(:not(:focus-within, :active)) {
+  position: absolute !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
+/* Accessible high-contrast focus indicator (WCAG 2.4.7 & 1.4.11 >= 3:1) */
+:where(a:any-link, button, input, select, [tabindex]:not([tabindex='-1'])):focus-visible {
+  outline: 2px solid var(--color-accent-cyan);
+  outline-offset: 3px;
+}
+
+/* Touch target sizing and coarse pointer adaptation (WCAG 2.5.8) */
+.interactive-target {
+  min-block-size: 28px;
+  min-inline-size: 28px;
+  transition:
+    background-color 160ms ease-out,
+    border-color 160ms ease-out,
+    color 160ms ease-out,
+    transform 160ms ease-out;
+  @media (pointer: coarse) {
+    min-block-size: 40px;
+    min-inline-size: 40px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    transition:
+      background-color 160ms ease-out,
+      border-color 160ms ease-out,
+      color 160ms ease-out;
+  }
+}
+
+/* Forced colors support for high-contrast assistive modes */
+@media (forced-colors: active) {
+  .instrument-panel {
+    border: 1px solid CanvasText;
+    background: Canvas;
+    color: CanvasText;
+  }
+}
