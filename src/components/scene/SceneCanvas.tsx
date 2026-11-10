@@ -1,8 +1,9 @@
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, PerformanceMonitor } from '@react-three/drei';
+import { PerformanceMonitor } from '@react-three/drei';
 import { CONTENT } from '../../content';
 import { QUALITY_PRESETS, useLabStore } from '../../store/useLabStore';
 import { ArmillaryRings } from './ArmillaryRings';
+import { InteractionRig } from './InteractionRig';
 import { ProceduralEnvironment } from './ProceduralEnvironment';
 import { TelemetryProbe } from './TelemetryProbe';
 
@@ -23,7 +24,7 @@ export default function SceneCanvas() {
       <Canvas
         dpr={preset.dpr}
         frameloop={isTabHidden ? 'never' : 'always'}
-        camera={{ position: [0, 0, 5.8], fov: 42, near: 0.1, far: 45 }}
+        camera={{ position: [0, 0.15, 5.8], fov: 42, near: 0.1, far: 45 }}
         gl={{
           antialias: preset.multisampling > 0,
           powerPreference: 'high-performance',
@@ -58,13 +59,7 @@ export default function SceneCanvas() {
 
         <ProceduralEnvironment />
         <ArmillaryRings />
-        <OrbitControls
-          enablePan={false}
-          enableDamping
-          dampingFactor={0.05}
-          minDistance={2.8}
-          maxDistance={9.5}
-        />
+        <InteractionRig />
         <TelemetryProbe />
       </Canvas>
     </div>

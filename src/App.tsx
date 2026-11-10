@@ -1,6 +1,7 @@
 import { Suspense, lazy } from 'react';
 import { Activity } from 'lucide-react';
 import { CONTENT } from './content';
+import { CoordinateHud } from './components/ui/CoordinateHud';
 import { QualitySelector } from './components/ui/QualitySelector';
 import { TechOverlay } from './components/ui/TechOverlay';
 import { useLabStore } from './store/useLabStore';
@@ -61,7 +62,8 @@ export function App() {
           </div>
         </header>
 
-        <footer className="flex items-end justify-between">
+        <footer className="flex flex-wrap items-end justify-between gap-3">
+          <CoordinateHud />
           <p className="font-telemetry rounded bg-[var(--color-void)]/70 px-2.5 py-1 text-[10px] tracking-[0.22em] text-[var(--color-text-secondary)] uppercase backdrop-blur-sm">
             {CONTENT.project.classification}
           </p>
