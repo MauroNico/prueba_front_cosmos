@@ -8,7 +8,7 @@ function preloadLatinFontsPlugin(): Plugin {
     name: 'preload-latin-fonts',
     transformIndexHtml: {
       order: 'post',
-      handler(html, ctx) {
+      handler(_html, ctx) {
         const tags: {
           tag: string;
           attrs: Record<string, string | boolean>;
