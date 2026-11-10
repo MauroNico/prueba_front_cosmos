@@ -125,7 +125,7 @@ export const transientLabState: TransientLabState = {
     mid: 0,
     treble: 0,
   },
-  introProgress: 0,
+  introProgress: 1,
   telemetry: {
     fps: 60,
     frameTimeMs: 16.6,
