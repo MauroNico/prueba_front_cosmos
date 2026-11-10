@@ -84,7 +84,7 @@ export const CONTENT = {
   },
   variants: [
     {
-      id: 'chrome',
+      id: 'chrome' as MaterialVariantId,
       label: 'Cromo Líquido',
       shortCode: 'HG-80',
       formula: 'Hg·Cr [99.4%]',
@@ -92,7 +92,7 @@ export const CONTENT = {
       indexOfRefraction: 'IOR 2.92',
     },
     {
-      id: 'obsidian',
+      id: 'obsidian' as MaterialVariantId,
       label: 'Obsidiana Emisiva',
       shortCode: 'OB-14',
       formula: 'SiO₂·Fe₃O₄',
@@ -100,7 +100,7 @@ export const CONTENT = {
       indexOfRefraction: 'IOR 1.50',
     },
     {
-      id: 'gold',
+      id: 'gold' as MaterialVariantId,
       label: 'Oro Bruñido',
       shortCode: 'AU-79',
       formula: 'Au·Cu [24K]',
@@ -108,34 +108,34 @@ export const CONTENT = {
       indexOfRefraction: 'IOR 0.47',
     },
     {
-      id: 'iridescent',
+      id: 'iridescent' as MaterialVariantId,
       label: 'Vidrio Iridiscente',
       shortCode: 'BI-83',
       formula: 'Bi₂O₃·SiO₂',
       description: 'Dieléctrico translúcido con dispersión espectral de película delgada.',
       indexOfRefraction: 'IOR 1.78',
     },
-  ] satisfies MaterialVariantContent[],
+  ],
   cameras: [
     {
-      id: 'frontal',
+      id: 'frontal' as CameraPresetId,
       label: 'Frontal',
       code: 'CAM-01',
       focalLength: '38mm EQUIV',
     },
     {
-      id: 'zenith',
+      id: 'zenith' as CameraPresetId,
       label: 'Cenital',
       code: 'CAM-02',
       focalLength: '28mm POLAR',
     },
     {
-      id: 'detail',
+      id: 'detail' as CameraPresetId,
       label: 'Detalle',
       code: 'CAM-03',
       focalLength: '85mm MACRO',
     },
-  ] satisfies CameraPresetContent[],
+  ],
   quality: {
     label: 'CALIDAD',
     tiers: {

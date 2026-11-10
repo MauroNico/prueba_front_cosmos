@@ -6,6 +6,7 @@ import { ArmillaryRings } from './ArmillaryRings';
 import { CosmicParticles } from './CosmicParticles';
 import { InteractionRig } from './InteractionRig';
 import { ProceduralEnvironment } from './ProceduralEnvironment';
+import { ShaderCompilerAndIntro } from './ShaderCompilerAndIntro';
 import { TelemetryProbe } from './TelemetryProbe';
 import { VolumetricCoreAndPostpro } from './VolumetricCoreAndPostpro';
 
@@ -64,6 +65,7 @@ export default function SceneCanvas() {
         <CosmicParticles />
         <VolumetricCoreAndPostpro />
         <InteractionRig />
+        <ShaderCompilerAndIntro />
         <TelemetryProbe />
       </Canvas>
     </div>

@@ -2,7 +2,10 @@ import { Suspense, lazy } from 'react';
 import { Activity } from 'lucide-react';
 import { CONTENT } from './content';
 import { AudioControls } from './components/ui/AudioControls';
+import { ChoreographedHeader } from './components/ui/ChoreographedHeader';
 import { CoordinateHud } from './components/ui/CoordinateHud';
+import { PreloaderOverlay } from './components/ui/PreloaderOverlay';
+import { ProductVisualizerDock } from './components/ui/ProductVisualizerDock';
 import { QualitySelector } from './components/ui/QualitySelector';
 import { TechOverlay } from './components/ui/TechOverlay';
 import { useLabStore } from './store/useLabStore';
@@ -22,31 +25,15 @@ export function App() {
         {CONTENT.accessibility.skipToControls}
       </a>
 
-      <Suspense
-        fallback={
-          <div className="flex h-full w-full items-center justify-center bg-[var(--color-void)]">
-            <p className="font-telemetry text-xs tracking-[0.24em] text-[var(--color-accent-cyan)] uppercase">
-              {CONTENT.preloader.statusCompiling}
-            </p>
-          </div>
-        }
-      >
+      <PreloaderOverlay />
+
+      <Suspense fallback={null}>
         <SceneCanvas />
       </Suspense>
 
-      <main className="pointer-events-none relative z-10 flex h-full w-full flex-col justify-between p-4 md:p-6">
-        <header className="flex flex-wrap items-start justify-between gap-4">
-          <div className="rounded bg-[var(--color-void)]/70 px-3 py-2 backdrop-blur-sm">
-            <p className="font-telemetry text-[11px] tracking-[0.28em] text-[var(--color-accent-cyan)] uppercase">
-              {CONTENT.project.edition}
-            </p>
-            <h1 className="font-display-editorial mt-0.5 text-2xl font-light tracking-tight md:text-4xl">
-              {CONTENT.project.name}
-            </h1>
-            <p className="font-telemetry mt-0.5 text-[11px] tracking-[0.2em] text-[var(--color-text-secondary)] uppercase">
-              {CONTENT.project.subtitle}
-            </p>
-          </div>
+      <main className="pointer-events-none relative z-10 flex h-full w-full flex-col justify-between p-3 sm:p-5">
+        <header className="flex flex-wrap items-start justify-between gap-3">
+          <ChoreographedHeader />
 
           <div id="instrument-controls" className="flex flex-wrap items-center gap-2">
             <AudioControls />
@@ -64,11 +51,14 @@ export function App() {
           </div>
         </header>
 
-        <footer className="flex flex-wrap items-end justify-between gap-3">
-          <CoordinateHud />
-          <p className="font-telemetry rounded bg-[var(--color-void)]/70 px-2.5 py-1 text-[10px] tracking-[0.22em] text-[var(--color-text-secondary)] uppercase backdrop-blur-sm">
-            {CONTENT.project.classification}
-          </p>
+        <footer className="flex flex-col gap-2">
+          <ProductVisualizerDock />
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <CoordinateHud />
+            <p className="font-telemetry rounded bg-[var(--color-void)]/75 px-2.5 py-1 text-[10px] tracking-[0.22em] text-[var(--color-text-secondary)] uppercase backdrop-blur-sm">
+              {CONTENT.project.classification}
+            </p>
+          </div>
         </footer>
       </main>
 
