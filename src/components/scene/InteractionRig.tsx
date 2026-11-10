@@ -4,6 +4,7 @@ import { OrbitControls } from '@react-three/drei';
 import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 import * as THREE from 'three';
 import type { CameraPresetId } from '../../content';
+import { sharedAudioEngine } from '../../lib/audioEngine';
 import { dampScalar, stepCriticallyDamped3DInPlace } from '../../lib/math';
 import {
   transientLabState,
@@ -131,6 +132,12 @@ export function InteractionRig() {
 
   useFrame((state, delta) => {
     const safeDelta = Math.min(delta, 0.1);
+
+    // 0. Sample FFT 3-band audio spectrum (Bass, Mid, Treble) with attack/release envelope
+    const bands = sharedAudioEngine.sampleBands(safeDelta);
+    transientLabState.audioBands.bass = bands.bass;
+    transientLabState.audioBands.mid = bands.mid;
+    transientLabState.audioBands.treble = bands.treble;
 
     // 1. Frame-rate independent critical damping for 3D pointer (omega = 12.5)
     stepCriticallyDamped3DInPlace(

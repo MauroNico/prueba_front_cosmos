@@ -1,6 +1,7 @@
 import { Suspense, lazy } from 'react';
 import { Activity } from 'lucide-react';
 import { CONTENT } from './content';
+import { AudioControls } from './components/ui/AudioControls';
 import { CoordinateHud } from './components/ui/CoordinateHud';
 import { QualitySelector } from './components/ui/QualitySelector';
 import { TechOverlay } from './components/ui/TechOverlay';
@@ -48,6 +49,7 @@ export function App() {
           </div>
 
           <div id="instrument-controls" className="flex flex-wrap items-center gap-2">
+            <AudioControls />
             <QualitySelector />
             <button
               type="button"

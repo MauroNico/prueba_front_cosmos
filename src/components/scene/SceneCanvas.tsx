@@ -3,6 +3,7 @@ import { PerformanceMonitor } from '@react-three/drei';
 import { CONTENT } from '../../content';
 import { QUALITY_PRESETS, useLabStore } from '../../store/useLabStore';
 import { ArmillaryRings } from './ArmillaryRings';
+import { CosmicParticles } from './CosmicParticles';
 import { InteractionRig } from './InteractionRig';
 import { ProceduralEnvironment } from './ProceduralEnvironment';
 import { TelemetryProbe } from './TelemetryProbe';
@@ -60,6 +61,7 @@ export default function SceneCanvas() {
 
         <ProceduralEnvironment />
         <ArmillaryRings />
+        <CosmicParticles />
         <VolumetricCoreAndPostpro />
         <InteractionRig />
         <TelemetryProbe />
