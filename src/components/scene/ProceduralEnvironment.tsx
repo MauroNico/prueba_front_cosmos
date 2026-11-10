@@ -6,8 +6,7 @@ export function ProceduralEnvironment() {
       <color attach="background" args={['#05070b']} />
       <fog attach="fog" args={['#05070b', 6.5, 18]} />
 
-      {/* Strictly bounded dynamic lights (2 lights total, no shadow maps to stay within GPU budget) */}
-      <pointLight position={[2.8, 2.2, 3.2]} intensity={18} color="#ffb35c" distance={14} decay={2} />
+      {/* Strictly bounded dynamic lights (Core pointLight is in VolumetricCoreAndPostpro + 1 rim spotLight here = 2 total) */}
       <spotLight
         position={[-3.5, -2.4, 2.8]}
         intensity={22}

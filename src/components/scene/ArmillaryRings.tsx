@@ -13,7 +13,7 @@ import ringsFragmentHead from '../../shaders/ringsFragmentHead.glsl';
 import ringsFragmentRoughness from '../../shaders/ringsFragmentRoughness.glsl';
 import ringsVertexHead from '../../shaders/ringsVertexHead.glsl';
 import ringsVertexMain from '../../shaders/ringsVertexMain.glsl';
-import { QUALITY_PRESETS, transientLabState, useLabStore } from '../../store/useLabStore';
+import { transientLabState, useLabStore } from '../../store/useLabStore';
 
 const RING_COUNT = 36;
 const RING_SEED = 133742;
@@ -41,18 +41,12 @@ export function ArmillaryRings() {
   const noiseFrequency = useLabStore((s) => s.shaderParams.noiseFrequency);
 
   const ringsData = useMemo(() => generateArmillaryRings(RING_COUNT, RING_SEED), []);
-  const preset = QUALITY_PRESETS[effectiveQuality];
 
   const uniformsRef = useRef<RingShaderUniforms>(createRingShaderUniforms());
 
-  // Build TorusGeometry + per-instance attributes deterministically
+  // Build TorusGeometry + per-instance attributes deterministically once (zero reallocation on quality switches)
   const geometry = useMemo(() => {
-    const geom = new THREE.TorusGeometry(
-      1.0,
-      0.022,
-      preset.torusRadialSegments,
-      preset.torusTubularSegments,
-    );
+    const geom = new THREE.TorusGeometry(1.0, 0.022, 20, 112);
 
     const metaArray = new Float32Array(RING_COUNT * 4);
     const axisArray = new Float32Array(RING_COUNT * 3);
@@ -73,7 +67,7 @@ export function ArmillaryRings() {
     geom.setAttribute('aRingMeta', new THREE.InstancedBufferAttribute(metaArray, 4));
     geom.setAttribute('aRingAxis', new THREE.InstancedBufferAttribute(axisArray, 3));
     return geom;
-  }, [preset.torusRadialSegments, preset.torusTubularSegments, ringsData]);
+  }, [ringsData]);
 
   // Real PBR MeshPhysicalMaterial extended with onBeforeCompile for liquid metal distortion
   const material = useMemo(() => {

@@ -6,6 +6,7 @@ import { ArmillaryRings } from './ArmillaryRings';
 import { InteractionRig } from './InteractionRig';
 import { ProceduralEnvironment } from './ProceduralEnvironment';
 import { TelemetryProbe } from './TelemetryProbe';
+import { VolumetricCoreAndPostpro } from './VolumetricCoreAndPostpro';
 
 export default function SceneCanvas() {
   const effectiveQuality = useLabStore((s) => s.effectiveQuality);
@@ -59,6 +60,7 @@ export default function SceneCanvas() {
 
         <ProceduralEnvironment />
         <ArmillaryRings />
+        <VolumetricCoreAndPostpro />
         <InteractionRig />
         <TelemetryProbe />
       </Canvas>
