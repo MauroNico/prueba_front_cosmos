@@ -12,3 +12,4 @@ vec3 crestGlow = uCrestEmissiveColor * crestMask * (uCrestEmissiveIntensity * (1
 vec3 fresnelRim = uFresnelColor * fresnelTerm * uFresnelIntensity;
 
 totalEmissiveRadiance += crestGlow + fresnelRim;
+

@@ -105,3 +105,4 @@ export function stepAudioEnvelope(
   const rate = target > current ? attackRate : releaseRate;
   return dampScalar(current, target, rate, dt);
 }
+

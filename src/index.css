@@ -66,16 +66,16 @@
 
 /* Touch target sizing and coarse pointer adaptation (WCAG 2.5.8) */
 .interactive-target {
-  min-block-size: 28px;
-  min-inline-size: 28px;
+  min-block-size: 26px;
+  min-inline-size: 26px;
   transition:
     background-color 160ms ease-out,
     border-color 160ms ease-out,
     color 160ms ease-out,
     transform 160ms ease-out;
   @media (pointer: coarse) {
-    min-block-size: 40px;
-    min-inline-size: 40px;
+    min-block-size: 28px;
+    min-inline-size: 28px;
   }
   @media (prefers-reduced-motion: reduce) {
     transition:
@@ -93,3 +93,4 @@
     color: CanvasText;
   }
 }
+

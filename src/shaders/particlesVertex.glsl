@@ -67,16 +67,16 @@ void main() {
   // Velocity magnitude drives color temperature in fragment shader
   float speedMag = length(curlVel * 0.35 + pointerVelocity * 1.4 + shockVelocity * 1.8) + uAudioTreble * 0.65;
   vSpeed = clamp(speedMag, 0.0, 1.0);
-  vSpark = step(0.78, layer);
+  vSpark = step(0.84, layer);
 
-  // Depth attenuation & treble brightness boost
-  float depthAtten = 190.0 / max(-mvPosition.z, 0.8);
-  float trebleScale = 1.0 + uAudioTreble * 1.35 + gravityPull * 0.45;
-  gl_PointSize = clamp(baseSize * trebleScale * depthAtten, 1.0, 24.0);
+  // Depth attenuation & treble brightness boost (pinpoint cosmic stardust)
+  float depthAtten = 42.0 / max(-mvPosition.z, 1.2);
+  float trebleScale = 1.0 + uAudioTreble * 1.15 + gravityPull * 0.35;
+  gl_PointSize = clamp(baseSize * trebleScale * depthAtten, 0.8, 7.5);
 
   // Distance fade at outer boundary and near camera clipping plane
   float radialDist = length(displaced);
-  float outerFade = 1.0 - smoothstep(4.2, 6.2, radialDist);
-  float nearFade = smoothstep(0.6, 1.6, -mvPosition.z);
-  vAlpha = outerFade * nearFade * (0.42 + uAudioTreble * 0.48 + gravityPull * 0.3);
+  float outerFade = 1.0 - smoothstep(4.0, 6.0, radialDist);
+  float nearFade = smoothstep(0.9, 2.0, -mvPosition.z);
+  vAlpha = outerFade * nearFade * (0.16 + uAudioTreble * 0.28 + gravityPull * 0.18);
 }

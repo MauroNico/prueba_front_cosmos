@@ -24,8 +24,8 @@ export function extractFftBands(
   const hzPerBin = sampleRate / fftSize;
 
   const sumRange = (minHz: number, maxHz: number): number => {
-    const startBin = Math.max(0, Math.floor(minHz / hzPerBin));
-    const endBin = Math.min(binCount - 1, Math.ceil(maxHz / hzPerBin));
+    const startBin = Math.max(0, Math.ceil(minHz / hzPerBin));
+    const endBin = Math.min(binCount - 1, Math.floor(maxHz / hzPerBin));
     if (endBin < startBin) return 0;
 
     let sum = 0;

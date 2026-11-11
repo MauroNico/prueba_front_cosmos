@@ -26,3 +26,4 @@ void main() {
 
   gl_FragColor = vec4(particleColor * (1.0 + uAudioTreble * 0.8), intensity * vAlpha);
 }
+

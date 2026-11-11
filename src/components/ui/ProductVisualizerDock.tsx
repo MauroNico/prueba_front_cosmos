@@ -11,7 +11,7 @@ import { cn } from '../../lib/cn';
 import { useLabStore } from '../../store/useLabStore';
 
 const controlButtonVariants = cva(
-  'interactive-target font-telemetry inline-flex items-center gap-1.5 rounded px-2.5 py-1 text-[11px] uppercase tracking-[0.14em] border',
+  'interactive-target font-telemetry inline-flex items-center gap-1 rounded px-1.5 py-0.5 sm:px-2.5 sm:py-1 text-[9px] sm:text-[11px] uppercase tracking-[0.11em] sm:tracking-[0.14em] border',
   {
     variants: {
       active: {
@@ -69,7 +69,7 @@ export function ProductVisualizerDock() {
   return (
     <nav
       aria-label={CONTENT.accessibility.controlsLandmark}
-      className="pointer-events-none flex w-full flex-col gap-2"
+      className="pointer-events-none flex w-full flex-col gap-1.5 sm:gap-2"
     >
       {/* Active Material Technical Readout Strip */}
       <div className="flex flex-wrap items-center justify-between gap-2">
@@ -80,15 +80,15 @@ export function ProductVisualizerDock() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: prefersReducedMotion ? 0 : -4 }}
             transition={{ duration: 0.18 }}
-            className="instrument-panel pointer-events-auto flex flex-wrap items-center gap-2.5 rounded border border-[var(--color-border-subtle)] bg-[var(--color-surface-glass)] px-3 py-1.5 backdrop-blur-md"
+            className="instrument-panel pointer-events-auto flex flex-wrap items-center gap-2 rounded border border-[var(--color-border-subtle)] bg-[var(--color-surface-glass)] px-2.5 py-1 backdrop-blur-md sm:px-3 sm:py-1.5"
           >
-            <span className="font-telemetry rounded bg-[var(--color-void-elevated)] px-1.5 py-0.5 text-[10px] font-semibold tracking-[0.16em] text-[var(--color-accent-warm)]">
+            <span className="font-telemetry rounded bg-[var(--color-void-elevated)] px-1.5 py-0.5 text-[9px] font-semibold tracking-[0.14em] text-[var(--color-accent-warm)] sm:text-[10px]">
               {activeVariantMeta.shortCode} // {activeVariantMeta.formula}
             </span>
-            <span className="font-telemetry text-[10px] tracking-[0.16em] text-[var(--color-accent-cyan)]">
+            <span className="font-telemetry text-[9px] tracking-[0.14em] text-[var(--color-accent-cyan)] sm:text-[10px]">
               {activeVariantMeta.indexOfRefraction}
             </span>
-            <span className="font-telemetry text-[11px] text-[var(--color-text-secondary)]">
+            <span className="font-telemetry hidden text-[11px] text-[var(--color-text-secondary)] sm:inline">
               {activeVariantMeta.description}
             </span>
           </motion.div>
@@ -100,14 +100,14 @@ export function ProductVisualizerDock() {
       </div>
 
       {/* Main Controls Row: Material Variants, Camera Presets, Exploration/Exhibition Mode, Motion Pause */}
-      <div className="flex flex-wrap items-center justify-between gap-2">
+      <div className="flex flex-wrap items-center justify-between gap-1.5 sm:gap-2">
         {/* 4 Material Variants */}
         <div
           role="group"
           aria-label={CONTENT.accessibility.variantsGroup}
-          className="instrument-panel pointer-events-auto flex flex-wrap items-center gap-1.5 rounded border border-[var(--color-border-subtle)] bg-[var(--color-surface-glass)] px-2.5 py-1.5 backdrop-blur-md"
+          className="instrument-panel pointer-events-auto flex flex-wrap items-center gap-1 rounded border border-[var(--color-border-subtle)] bg-[var(--color-surface-glass)] px-2 py-1 backdrop-blur-md sm:gap-1.5 sm:px-2.5 sm:py-1.5"
         >
-          <span className="font-telemetry mr-1 flex items-center gap-1 text-[10px] tracking-[0.18em] text-[var(--color-text-secondary)] uppercase">
+          <span className="font-telemetry mr-0.5 hidden items-center gap-1 text-[10px] tracking-[0.18em] text-[var(--color-text-secondary)] uppercase sm:flex">
             <Layers aria-hidden="true" className="h-3.5 w-3.5 text-[var(--color-accent-warm)]" />
             <span>MATERIAL</span>
           </span>
@@ -134,13 +134,13 @@ export function ProductVisualizerDock() {
         </div>
 
         {/* Camera Presets + Mode + Pause Motion */}
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
           <div
             role="group"
             aria-label={CONTENT.accessibility.cameraGroup}
-            className="instrument-panel pointer-events-auto flex flex-wrap items-center gap-1.5 rounded border border-[var(--color-border-subtle)] bg-[var(--color-surface-glass)] px-2.5 py-1.5 backdrop-blur-md"
+            className="instrument-panel pointer-events-auto flex flex-wrap items-center gap-1 rounded border border-[var(--color-border-subtle)] bg-[var(--color-surface-glass)] px-2 py-1 backdrop-blur-md sm:gap-1.5 sm:px-2.5 sm:py-1.5"
           >
-            <span className="font-telemetry mr-1 flex items-center gap-1 text-[10px] tracking-[0.18em] text-[var(--color-text-secondary)] uppercase">
+            <span className="font-telemetry mr-0.5 hidden items-center gap-1 text-[10px] tracking-[0.18em] text-[var(--color-text-secondary)] uppercase sm:flex">
               <Camera aria-hidden="true" className="h-3.5 w-3.5 text-[var(--color-accent-cyan)]" />
               <span>CÁMARA</span>
             </span>
@@ -169,9 +169,12 @@ export function ProductVisualizerDock() {
           <div
             role="group"
             aria-label={CONTENT.accessibility.modeGroup}
-            className="instrument-panel pointer-events-auto flex flex-wrap items-center gap-1.5 rounded border border-[var(--color-border-subtle)] bg-[var(--color-surface-glass)] px-2.5 py-1.5 backdrop-blur-md"
+            className="instrument-panel pointer-events-auto flex flex-wrap items-center gap-1 rounded border border-[var(--color-border-subtle)] bg-[var(--color-surface-glass)] px-2 py-1 backdrop-blur-md sm:gap-1.5 sm:px-2.5 sm:py-1.5"
           >
-            <Compass aria-hidden="true" className="h-3.5 w-3.5 text-[var(--color-accent-cyan)]" />
+            <Compass
+              aria-hidden="true"
+              className="hidden h-3.5 w-3.5 text-[var(--color-accent-cyan)] sm:inline-block"
+            />
             {(['exploration', 'exhibition'] as const).map((mKey) => {
               const m = CONTENT.modes[mKey];
               const isActive = mode === m.id;
@@ -198,16 +201,16 @@ export function ProductVisualizerDock() {
             <button
               type="button"
               onClick={toggleMotionPaused}
-              className="interactive-target font-telemetry ml-1 inline-flex items-center gap-1 rounded border border-[var(--color-border-strong)] bg-[var(--color-void-elevated)] px-2.5 py-1 text-[11px] tracking-[0.14em] text-[var(--color-text-primary)] uppercase hover:border-[var(--color-accent-warm)]"
+              className="interactive-target font-telemetry inline-flex items-center gap-1 rounded border border-[var(--color-border-strong)] bg-[var(--color-void-elevated)] px-1.5 py-0.5 text-[9px] tracking-[0.11em] text-[var(--color-text-primary)] uppercase hover:border-[var(--color-accent-warm)] sm:ml-1 sm:px-2.5 sm:py-1 sm:text-[11px] sm:tracking-[0.14em]"
             >
               {motionPaused ? (
                 <>
-                  <Play aria-hidden="true" className="h-3.5 w-3.5 text-[var(--color-accent-warm)]" />
+                  <Play aria-hidden="true" className="h-3 w-3 text-[var(--color-accent-warm)]" />
                   <span>{CONTENT.accessibility.resumeMotion}</span>
                 </>
               ) : (
                 <>
-                  <Pause aria-hidden="true" className="h-3.5 w-3.5 text-[var(--color-accent-cyan)]" />
+                  <Pause aria-hidden="true" className="h-3 w-3 text-[var(--color-accent-cyan)]" />
                   <span>{CONTENT.accessibility.pauseMotion}</span>
                 </>
               )}

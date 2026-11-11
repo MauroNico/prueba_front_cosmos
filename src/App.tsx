@@ -31,49 +31,55 @@ export function App() {
 
   return (
     <div className="relative h-full w-full overflow-hidden bg-[var(--color-void)] text-[var(--color-text-primary)] select-none">
-      <a
-        href="#instrument-controls"
-        className="visually-hidden fixed top-3 left-3 z-50 rounded border border-[var(--color-accent-cyan)] bg-[var(--color-void-elevated)] px-3 py-2 text-xs text-[var(--color-text-primary)]"
-      >
-        {CONTENT.accessibility.skipToControls}
-      </a>
+      <nav aria-label={CONTENT.accessibility.skipToControls}>
+        <a
+          href="#instrument-controls"
+          className="visually-hidden fixed top-3 left-3 z-50 rounded border border-[var(--color-accent-cyan)] bg-[var(--color-void-elevated)] px-3 py-2 text-xs text-[var(--color-text-primary)]"
+        >
+          {CONTENT.accessibility.skipToControls}
+        </a>
+      </nav>
 
-      <PreloaderOverlay />
-      <WebglFallbackView onRestoreRequest={handleRestoreContext} />
+      <main className="relative h-full w-full">
+        <PreloaderOverlay />
+        <WebglFallbackView onRestoreRequest={handleRestoreContext} />
 
-      <Suspense fallback={null}>
-        <SceneCanvas />
-      </Suspense>
+        <Suspense fallback={null}>
+          <SceneCanvas />
+        </Suspense>
 
-      <main className="pointer-events-none relative z-30 flex h-full w-full flex-col justify-between p-3 sm:p-5">
-        <header className="flex flex-wrap items-start justify-between gap-3">
-          <ChoreographedHeader />
+        <div className="pointer-events-none relative z-30 flex h-full w-full flex-col justify-between p-3 sm:p-5">
+          <header className="flex flex-wrap items-start justify-between gap-3">
+            <ChoreographedHeader />
 
-          <div id="instrument-controls" className="flex flex-wrap items-center gap-2">
-            <AudioControls />
-            <QualitySelector />
-            <button
-              type="button"
-              aria-pressed={showTechOverlay}
-              aria-label={CONTENT.accessibility.toggleTechOverlay}
-              onClick={toggleTechOverlay}
-              className="instrument-panel interactive-target font-telemetry pointer-events-auto inline-flex items-center gap-1.5 rounded border border-[var(--color-border-subtle)] bg-[var(--color-surface-glass)] px-2.5 py-1.5 text-[11px] tracking-[0.15em] text-[var(--color-text-primary)] uppercase backdrop-blur-md hover:border-[var(--color-accent-cyan)]"
-            >
-              <Activity aria-hidden="true" className="h-3.5 w-3.5 text-[var(--color-accent-cyan)]" />
-              <span>[D]</span>
-            </button>
-          </div>
-        </header>
+            <div id="instrument-controls" className="flex flex-wrap items-center gap-2">
+              <AudioControls />
+              <QualitySelector />
+              <button
+                type="button"
+                aria-pressed={showTechOverlay}
+                onClick={toggleTechOverlay}
+                className="instrument-panel interactive-target font-telemetry pointer-events-auto inline-flex items-center gap-1.5 rounded border border-[var(--color-border-subtle)] bg-[var(--color-surface-glass)] px-2.5 py-1.5 text-[11px] tracking-[0.15em] text-[var(--color-text-primary)] uppercase backdrop-blur-md hover:border-[var(--color-accent-cyan)]"
+              >
+                <Activity aria-hidden="true" className="h-3.5 w-3.5 text-[var(--color-accent-cyan)]" />
+                <span className="visually-hidden">
+                  {CONTENT.accessibility.toggleTechOverlay}{' '}
+                </span>
+                <span>[D]</span>
+              </button>
+            </div>
+          </header>
 
-        <footer className="flex flex-col gap-2">
-          <ProductVisualizerDock />
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <CoordinateHud />
-            <p className="font-telemetry rounded bg-[var(--color-void)]/75 px-2.5 py-1 text-[10px] tracking-[0.22em] text-[var(--color-text-secondary)] uppercase backdrop-blur-sm">
-              {CONTENT.project.classification}
-            </p>
-          </div>
-        </footer>
+          <footer className="flex flex-col gap-2">
+            <ProductVisualizerDock />
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <CoordinateHud />
+              <p className="font-telemetry rounded bg-[var(--color-void)]/75 px-2.5 py-1 text-[10px] tracking-[0.22em] text-[var(--color-text-secondary)] uppercase backdrop-blur-sm">
+                {CONTENT.project.classification}
+              </p>
+            </div>
+          </footer>
+        </div>
       </main>
 
       <TechOverlay />

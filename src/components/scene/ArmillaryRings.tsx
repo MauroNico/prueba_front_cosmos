@@ -109,7 +109,8 @@ export function ArmillaryRings() {
 
       shader.vertexShader = shader.vertexShader
         .replace('#include <common>', `#include <common>\n${ringsVertexHead}`)
-        .replace('#include <beginnormal_vertex>', `#include <beginnormal_vertex>\n${ringsVertexMain}`);
+        .replace('#include <beginnormal_vertex>', `#include <beginnormal_vertex>\n${ringsVertexMain}`)
+        .replace('#include <begin_vertex>', `#include <begin_vertex>\ntransformed = displacedRingPos;`);
 
       shader.fragmentShader = shader.fragmentShader
         .replace('#include <common>', `#include <common>\n${ringsFragmentHead}`)

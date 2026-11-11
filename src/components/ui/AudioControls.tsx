@@ -110,7 +110,6 @@ export function AudioControls() {
       {/* Always visible Mute / Unmute button */}
       <button
         type="button"
-        aria-label={audioMuted || !audioEnabled ? CONTENT.accessibility.unmuteAudio : CONTENT.accessibility.muteAudio}
         aria-pressed={audioMuted}
         onClick={handleToggleMute}
         className="interactive-target font-telemetry inline-flex items-center gap-1 rounded border border-[var(--color-border-subtle)] px-2 py-1 text-[10px] tracking-[0.14em] text-[var(--color-text-primary)] uppercase hover:border-[var(--color-accent-cyan)]"
@@ -120,6 +119,11 @@ export function AudioControls() {
         ) : (
           <Volume2 aria-hidden="true" className="h-3.5 w-3.5 text-[var(--color-accent-cyan)]" />
         )}
+        <span className="visually-hidden">
+          {audioMuted || !audioEnabled
+            ? `${CONTENT.accessibility.unmuteAudio} `
+            : `${CONTENT.accessibility.muteAudio} `}
+        </span>
         <span>{audioMuted ? CONTENT.audio.mutedLabel : `${Math.round(audioVolume * 100)}%`}</span>
       </button>
 
@@ -152,7 +156,7 @@ export function AudioControls() {
         ) : (
           <MicOff aria-hidden="true" className="h-3.5 w-3.5 text-[var(--color-text-muted)]" />
         )}
-        <span className="hidden sm:inline">
+        <span className="sr-only sm:not-sr-only">
           {micEnabled ? CONTENT.accessibility.disableMic : CONTENT.accessibility.enableMic}
         </span>
       </button>

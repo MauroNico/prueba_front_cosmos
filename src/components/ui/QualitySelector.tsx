@@ -5,7 +5,7 @@ import { cn } from '../../lib/cn';
 import { useLabStore } from '../../store/useLabStore';
 
 const pillVariants = cva(
-  'interactive-target font-telemetry inline-flex items-center justify-center rounded px-2.5 py-1 text-[11px] uppercase tracking-[0.14em] border',
+  'interactive-target font-telemetry inline-flex items-center justify-center rounded px-1.5 py-0.5 sm:px-2.5 sm:py-1 text-[9px] sm:text-[11px] uppercase tracking-[0.12em] sm:tracking-[0.14em] border',
   {
     variants: {
       active: {
@@ -31,9 +31,9 @@ export function QualitySelector() {
     <div
       role="group"
       aria-label={CONTENT.accessibility.qualityGroup}
-      className="instrument-panel pointer-events-auto flex flex-wrap items-center gap-1.5 rounded border border-[var(--color-border-subtle)] bg-[var(--color-surface-glass)] px-2.5 py-1.5 backdrop-blur-md"
+      className="instrument-panel pointer-events-auto flex flex-wrap items-center gap-1 rounded border border-[var(--color-border-subtle)] bg-[var(--color-surface-glass)] px-2 py-1 backdrop-blur-md sm:gap-1.5 sm:px-2.5 sm:py-1.5"
     >
-      <span className="font-telemetry mr-1 flex items-center gap-1 text-[10px] tracking-[0.2em] text-[var(--color-text-secondary)] uppercase">
+      <span className="font-telemetry mr-0.5 hidden items-center gap-1 text-[10px] tracking-[0.2em] text-[var(--color-text-secondary)] uppercase sm:flex">
         <Gauge aria-hidden="true" className="h-3 w-3 text-[var(--color-accent-cyan)]" />
         {CONTENT.quality.label}
       </span>
@@ -54,7 +54,7 @@ export function QualitySelector() {
             {isActive && (
               <span
                 aria-hidden="true"
-                className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-accent-cyan)]"
+                className="mr-1 inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-accent-cyan)]"
               />
             )}
             {label}

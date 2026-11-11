@@ -48,3 +48,4 @@ export default function DebugLevaControls({ hidden }: { hidden: boolean }) {
 
   return <Leva hidden={hidden} oneLineLabels flat titleBar={{ title: 'PARAMS EN VIVO' }} />;
 }
+

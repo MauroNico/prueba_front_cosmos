@@ -109,3 +109,4 @@ vec3 curlNoise(vec3 p, float time) {
 
   return normalize(vec3(x, y, z) + vec3(1e-5));
 }
+

@@ -16,6 +16,7 @@ export function TelemetryProbe() {
 
   useEffect(() => {
     window.__RING_SPHERE_TELEMETRY__ = transientLabState.telemetry;
+    gl.info.autoReset = false;
 
     const context = gl.getContext();
     const debugInfo = context.getExtension('WEBGL_debug_renderer_info');
@@ -46,6 +47,10 @@ export function TelemetryProbe() {
   }, [gl]);
 
   useFrame((_state, delta) => {
+    const frameCalls = gl.info.render.calls;
+    const frameTriangles = gl.info.render.triangles;
+    gl.info.reset();
+
     frameCountRef.current += 1;
     accumTimeRef.current += delta;
 
@@ -56,8 +61,8 @@ export function TelemetryProbe() {
 
       transientLabState.telemetry.fps = fps;
       transientLabState.telemetry.frameTimeMs = Number((avgDelta * 1000).toFixed(2));
-      transientLabState.telemetry.drawCalls = gl.info.render.calls;
-      transientLabState.telemetry.triangles = gl.info.render.triangles;
+      transientLabState.telemetry.drawCalls = frameCalls;
+      transientLabState.telemetry.triangles = frameTriangles;
       transientLabState.telemetry.geometries = gl.info.memory.geometries;
       transientLabState.telemetry.textures = gl.info.memory.textures;
       transientLabState.telemetry.dpr = Number(gl.getPixelRatio().toFixed(2));
@@ -71,3 +76,4 @@ export function TelemetryProbe() {
 
   return null;
 }
+

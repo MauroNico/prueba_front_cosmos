@@ -42,14 +42,14 @@ export function ChoreographedHeader() {
   }, [prefersReducedMotion, preloaderPhase]);
 
   return (
-    <div className="rounded bg-[var(--color-void)]/75 px-3.5 py-2 backdrop-blur-md">
-      <p className="font-telemetry text-[10px] tracking-[0.28em] text-[var(--color-accent-cyan)] uppercase">
+    <div className="rounded bg-[var(--color-void)]/75 px-2.5 py-1.5 backdrop-blur-md sm:px-3.5 sm:py-2">
+      <p className="font-telemetry hidden text-[10px] tracking-[0.28em] text-[var(--color-accent-cyan)] uppercase sm:block">
         {CONTENT.project.edition}
       </p>
       <h1
         ref={titleContainerRef}
         aria-label={CONTENT.project.name}
-        className="font-display-editorial mt-0.5 text-2xl font-light tracking-tight text-[var(--color-text-primary)] md:text-4xl"
+        className="font-display-editorial text-lg font-light tracking-tight text-[var(--color-text-primary)] sm:mt-0.5 sm:text-3xl md:text-4xl"
       >
         {characters.map((ch, idx) => (
           <span
@@ -62,7 +62,7 @@ export function ChoreographedHeader() {
           </span>
         ))}
       </h1>
-      <p className="font-telemetry mt-0.5 text-[10px] tracking-[0.2em] text-[var(--color-text-secondary)] uppercase">
+      <p className="font-telemetry hidden text-[10px] tracking-[0.2em] text-[var(--color-text-secondary)] uppercase sm:mt-0.5 sm:block">
         {CONTENT.project.subtitle}
       </p>
     </div>

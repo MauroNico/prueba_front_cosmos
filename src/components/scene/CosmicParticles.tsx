@@ -131,3 +131,4 @@ export function CosmicParticles() {
 
   return <points geometry={geometry} material={material} renderOrder={2} frustumCulled={false} />;
 }
+
