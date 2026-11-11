@@ -1,0 +1,75 @@
+{
+  "webVitals": {
+    "lcpMs": 596,
+    "fcpMs": 596,
+    "cls": 0
+  },
+  "desktop": {
+    "idle": {
+      "fps": 60,
+      "frameTimeMs": 16.65,
+      "drawCalls": 27,
+      "triangles": 163511,
+      "geometries": 9,
+      "textures": 30,
+      "dpr": 1,
+      "particleCount": 52000,
+      "godRaysScale": 0.75,
+      "isSoftwareRenderer": false,
+      "rendererName": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1650 (0x00001F82) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "longTasksCount": 4
+    },
+    "interaction": {
+      "fps": 60,
+      "frameTimeMs": 16.68,
+      "drawCalls": 27,
+      "triangles": 163511,
+      "geometries": 9,
+      "textures": 30,
+      "dpr": 1,
+      "particleCount": 52000,
+      "godRaysScale": 0.75,
+      "isSoftwareRenderer": false,
+      "rendererName": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1650 (0x00001F82) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "longTasksCount": 4
+    },
+    "visualizer": {
+      "fps": 60,
+      "frameTimeMs": 16.64,
+      "drawCalls": 27,
+      "triangles": 163511,
+      "geometries": 9,
+      "textures": 31,
+      "dpr": 1,
+      "particleCount": 52000,
+      "godRaysScale": 0.75,
+      "isSoftwareRenderer": false,
+      "rendererName": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1650 (0x00001F82) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "longTasksCount": 5
+    },
+    "audio": {
+      "fps": 60,
+      "frameTimeMs": 16.66,
+      "drawCalls": 27,
+      "triangles": 163511,
+      "geometries": 9,
+      "textures": 31,
+      "dpr": 1,
+      "particleCount": 52000,
+      "godRaysScale": 0.75,
+      "isSoftwareRenderer": false,
+      "rendererName": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1650 (0x00001F82) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "longTasksCount": 6
+    },
+    "leakCheck50x": {
+      "before": {
+        "geometries": 9,
+        "textures": 31
+      },
+      "after": {
+        "geometries": 9,
+        "textures": 31
+      }
+    }
+  }
+}
