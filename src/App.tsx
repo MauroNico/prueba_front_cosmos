@@ -8,13 +8,26 @@ import { PreloaderOverlay } from './components/ui/PreloaderOverlay';
 import { ProductVisualizerDock } from './components/ui/ProductVisualizerDock';
 import { QualitySelector } from './components/ui/QualitySelector';
 import { TechOverlay } from './components/ui/TechOverlay';
+import { WebglFallbackView } from './components/ui/WebglFallbackView';
+import { useEnvironmentListeners } from './hooks/useEnvironmentListeners';
 import { useLabStore } from './store/useLabStore';
 
 const SceneCanvas = lazy(() => import('./components/scene/SceneCanvas'));
 
 export function App() {
+  useEnvironmentListeners();
+
   const showTechOverlay = useLabStore((s) => s.showTechOverlay);
   const toggleTechOverlay = useLabStore((s) => s.toggleTechOverlay);
+  const setWebglStatus = useLabStore((s) => s.setWebglStatus);
+
+  const handleRestoreContext = () => {
+    if (window.__RING_SPHERE_CONTEXT_API__) {
+      window.__RING_SPHERE_CONTEXT_API__.restoreContext();
+    } else {
+      setWebglStatus('ok');
+    }
+  };
 
   return (
     <div className="relative h-full w-full overflow-hidden bg-[var(--color-void)] text-[var(--color-text-primary)] select-none">
@@ -26,12 +39,13 @@ export function App() {
       </a>
 
       <PreloaderOverlay />
+      <WebglFallbackView onRestoreRequest={handleRestoreContext} />
 
       <Suspense fallback={null}>
         <SceneCanvas />
       </Suspense>
 
-      <main className="pointer-events-none relative z-10 flex h-full w-full flex-col justify-between p-3 sm:p-5">
+      <main className="pointer-events-none relative z-30 flex h-full w-full flex-col justify-between p-3 sm:p-5">
         <header className="flex flex-wrap items-start justify-between gap-3">
           <ChoreographedHeader />
 

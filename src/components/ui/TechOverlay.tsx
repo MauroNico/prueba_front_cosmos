@@ -1,63 +1,30 @@
-import { useEffect, useMemo, useRef } from 'react';
-import { Leva, useControls } from 'leva';
+import { Suspense, lazy, useEffect, useMemo, useRef } from 'react';
 import { Activity, Cpu } from 'lucide-react';
 import { CONTENT } from '../../content';
 import { transientLabState, useLabStore } from '../../store/useLabStore';
+
+const DebugLevaControls = lazy(() => import('./DebugLevaControls'));
+
+declare global {
+  interface Window {
+    __RING_SPHERE_CONTEXT_API__?: {
+      loseContext: () => void;
+      restoreContext: () => void;
+    };
+  }
+}
 
 export function TechOverlay() {
   const showTechOverlay = useLabStore((s) => s.showTechOverlay);
   const toggleTechOverlay = useLabStore((s) => s.toggleTechOverlay);
   const effectiveQuality = useLabStore((s) => s.effectiveQuality);
   const qualityTier = useLabStore((s) => s.qualityTier);
-  const setShaderParam = useLabStore((s) => s.setShaderParam);
 
   const isDebugMode = useMemo(() => {
     if (typeof window === 'undefined') return false;
     const params = new URLSearchParams(window.location.search);
     return import.meta.env.DEV || params.has('debug');
   }, []);
-
-  useControls(
-    'Shader & Postpro',
-    () => ({
-      noiseAmplitude: {
-        value: 0.18,
-        min: 0.0,
-        max: 0.55,
-        step: 0.01,
-        onChange: (v: number) => setShaderParam('noiseAmplitude', v),
-      },
-      noiseFrequency: {
-        value: 1.65,
-        min: 0.4,
-        max: 4.0,
-        step: 0.05,
-        onChange: (v: number) => setShaderParam('noiseFrequency', v),
-      },
-      godRaysIntensity: {
-        value: 0.82,
-        min: 0.0,
-        max: 1.5,
-        step: 0.02,
-        onChange: (v: number) => setShaderParam('godRaysIntensity', v),
-      },
-      bloomIntensity: {
-        value: 1.15,
-        min: 0.0,
-        max: 3.0,
-        step: 0.05,
-        onChange: (v: number) => setShaderParam('bloomIntensity', v),
-      },
-      particleTurbulence: {
-        value: 1.0,
-        min: 0.1,
-        max: 3.0,
-        step: 0.05,
-        onChange: (v: number) => setShaderParam('particleTurbulence', v),
-      },
-    }),
-    [setShaderParam],
-  );
 
   // Keyboard shortcut 'D' to toggle technical telemetry overlay
   useEffect(() => {
@@ -121,7 +88,11 @@ export function TechOverlay() {
 
   return (
     <>
-      <Leva hidden={!isDebugMode || !showTechOverlay} oneLineLabels flat titleBar={{ title: 'PARAMS EN VIVO' }} />
+      {isDebugMode && (
+        <Suspense fallback={null}>
+          <DebugLevaControls hidden={!showTechOverlay} />
+        </Suspense>
+      )}
 
       {showTechOverlay && (
         <aside
@@ -229,6 +200,14 @@ export function TechOverlay() {
           >
             {CONTENT.techPanel.softwareWarning}
           </div>
+
+          <button
+            type="button"
+            onClick={() => window.__RING_SPHERE_CONTEXT_API__?.loseContext()}
+            className="interactive-target font-telemetry mt-2 w-full rounded border border-[var(--color-border-subtle)] bg-[var(--color-void-elevated)] px-2 py-1 text-[10px] tracking-[0.14em] text-[var(--color-text-secondary)] uppercase hover:border-[var(--color-accent-warm)] hover:text-[var(--color-accent-warm)]"
+          >
+            {CONTENT.fallbacks.simulateContextLoss}
+          </button>
         </aside>
       )}
     </>

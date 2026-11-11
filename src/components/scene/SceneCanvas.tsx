@@ -13,10 +13,15 @@ import { VolumetricCoreAndPostpro } from './VolumetricCoreAndPostpro';
 export default function SceneCanvas() {
   const effectiveQuality = useLabStore((s) => s.effectiveQuality);
   const isTabHidden = useLabStore((s) => s.isTabHidden);
+  const webglStatus = useLabStore((s) => s.webglStatus);
   const stepPerformanceQuality = useLabStore((s) => s.stepPerformanceQuality);
   const setWebglStatus = useLabStore((s) => s.setWebglStatus);
 
   const preset = QUALITY_PRESETS[effectiveQuality];
+
+  if (webglStatus === 'unsupported') {
+    return null;
+  }
 
   return (
     <div
@@ -26,7 +31,7 @@ export default function SceneCanvas() {
     >
       <Canvas
         dpr={preset.dpr}
-        frameloop={isTabHidden ? 'never' : 'always'}
+        frameloop={isTabHidden || webglStatus !== 'ok' ? 'never' : 'always'}
         camera={{ position: [0, 0.15, 5.8], fov: 42, near: 0.1, far: 45 }}
         gl={{
           antialias: preset.multisampling > 0,
@@ -37,6 +42,29 @@ export default function SceneCanvas() {
         }}
         onCreated={({ gl }) => {
           const canvas = gl.domElement;
+          const ctx = gl.getContext();
+          const loseCtxExt = ctx.getExtension('WEBGL_lose_context');
+
+          window.__RING_SPHERE_CONTEXT_API__ = {
+            loseContext: () => {
+              if (loseCtxExt) {
+                loseCtxExt.loseContext();
+              } else {
+                setWebglStatus('context-lost');
+              }
+            },
+            restoreContext: () => {
+              if (loseCtxExt) {
+                try {
+                  loseCtxExt.restoreContext();
+                } catch {
+                  setWebglStatus('ok');
+                }
+              }
+              setWebglStatus('ok');
+            },
+          };
+
           canvas.addEventListener(
             'webglcontextlost',
             (e) => {
